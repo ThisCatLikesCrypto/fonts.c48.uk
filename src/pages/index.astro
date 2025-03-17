@@ -1,0 +1,146 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+	<h1>c48 fonts</h1>
+	<div id="font-container"></div>
+	<div id="right-flyout">
+		<h2>included fonts</h2>
+		<div id="included-fonts"></div>
+		<div id="included-fonts-code"></div>
+	</div>
+</Layout>
+
+<script>
+	var fontsAdded: string[] = [];
+
+	// URL of the JSON file containing font stylesheet URLs
+	const jsonUrl = "https://assets.c48.uk/fonts/all.json";
+
+	// Sample text to display for each font
+	const sampleText = "The quick brown fox jumps over the lazy dog.";
+
+	// Fetch the JSON data
+	fetch(jsonUrl)
+		.then((response) => response.json())
+		.then((fonts) => {
+			const fontContainer = document.getElementById("font-container");
+
+			fonts.forEach((font) => {
+				const fontWithoutHyphens = font.replace("-", " ");
+
+				// Create a link element to load the font stylesheet
+				const link = document.createElement("link");
+				link.rel = "stylesheet";
+				link.href = "https://assets.c48.uk/fonts/" + font + ".css";
+				document.head.appendChild(link);
+
+				// Create a card to display the font sample
+				const fontSample = document.createElement("div");
+				fontSample.className = "font-sample";
+				fontSample.style.backgroundColor = "#fff";
+				fontSample.style.borderRadius = "8px";
+				fontSample.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+				fontSample.style.padding = "20px";
+				fontSample.style.width = "300px";
+				fontSample.style.textAlign = "center";
+				fontSample.style.transition = "transform 0.3s, box-shadow 0.3s";
+
+				// Display the font name
+				const fontName = document.createElement("div");
+				fontName.className = "font-name";
+				fontName.style.fontSize = "1.8em";
+				fontName.style.fontWeight = "bold";
+				fontName.style.marginBottom = "15px";
+				fontName.textContent = fontWithoutHyphens;
+				fontSample.appendChild(fontName);
+
+				// Display the sample text in the font
+				const sample = document.createElement("p");
+				sample.className = "sample-text";
+				// i tried to do this with normal stylesheets but it didn't work for some reason
+				sample.style.fontFamily = fontWithoutHyphens;
+				sample.style.fontSize = "30px";
+				sample.style.padding = "15px";
+				sample.style.border = "1px solid #eee";
+				sample.style.borderRadius = "4px";
+				sample.style.backgroundColor = "#fafafa";
+				sample.textContent = sampleText;
+				fontSample.appendChild(sample);
+
+				const addButton = document.createElement("button");
+				addButton.textContent = "Add to page";
+				addButton.style.backgroundColor = "#007bff";
+				addButton.style.color = "#fff";
+				addButton.style.border = "none";
+				addButton.style.padding = "10px 20px";
+				addButton.style.borderRadius = "4px";
+				addButton.style.cursor = "pointer";
+				addButton.style.fontSize = "1.2em";
+				addButton.addEventListener("click", () => {
+					if (fontsAdded.includes(font)) {
+						alert("font already added");
+						return;
+					}
+					fontsAdded.push(font);
+					console.log(fontsAdded);
+					updateIncludedFonts();
+				});
+				fontSample.appendChild(addButton);
+
+				// Add the font sample card to the container
+				fontContainer.appendChild(fontSample);
+			});
+		})
+		.catch((error) => {
+			console.error("Error loading fonts:", error);
+		});
+
+	function updateIncludedFonts() {
+		const includedFonts = document.getElementById("included-fonts");
+		const includedFontsCode = document.getElementById("included-fonts-code");
+		includedFonts.innerHTML = "";
+		includedFontsCode.innerHTML = "";
+		fontsAdded.forEach((font) => {
+			const fontName = font.replace("-", " ");
+			const fontLink = document.createElement("p");
+			fontLink.textContent = fontName;
+			includedFonts.appendChild(fontLink);
+			includedFonts.appendChild(document.createTextNode(" "));
+
+			const fontCode = document.createElement("code");
+			fontCode.innerHTML = `@import url('https://assets.c48.uk/fonts/${font}.css');<br>`;
+			includedFontsCode.appendChild(fontCode);
+		});
+	}
+
+</script>
+
+<style>
+	/* Global styles */
+	body {
+		font-family: Lexend, Calibri, Carlito, sans-serif;
+		margin: 20px;
+		background-color: #f4f4f4;
+	}
+
+	h1 {
+		text-align: center;
+		font-size: 3em;
+		margin-bottom: 40px;
+	}
+
+	/* Container for all cards */
+	#font-container {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 30px;
+	}
+
+	.font-sample:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	}
+</style>
