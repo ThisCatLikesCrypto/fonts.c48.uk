@@ -8,6 +8,7 @@ import Layout from "../layouts/Layout.astro";
 	<div id="right-flyout">
 		<h2>included fonts</h2>
 		<div id="included-fonts"></div>
+		<p>add this to the top of your CSS file:</p>
 		<div id="included-fonts-code"></div>
 	</div>
 </Layout>
@@ -92,6 +93,7 @@ import Layout from "../layouts/Layout.astro";
 				// Add the font sample card to the container
 				fontContainer.appendChild(fontSample);
 			});
+			toggleRightFlyout();
 		})
 		.catch((error) => {
 			console.error("Error loading fonts:", error);
@@ -104,15 +106,26 @@ import Layout from "../layouts/Layout.astro";
 		includedFontsCode.innerHTML = "";
 		fontsAdded.forEach((font) => {
 			const fontName = font.replace("-", " ");
-			const fontLink = document.createElement("p");
-			fontLink.textContent = fontName;
+			const fontLink = document.createElement("span");
+			if (includedFonts.innerHTML !== "") {
+				fontLink.innerHTML = ", ";
+			}
+			fontLink.innerHTML += fontName;
 			includedFonts.appendChild(fontLink);
-			includedFonts.appendChild(document.createTextNode(" "));
 
 			const fontCode = document.createElement("code");
 			fontCode.innerHTML = `@import url('https://assets.c48.uk/fonts/${font}.css');<br>`;
 			includedFontsCode.appendChild(fontCode);
 		});
+	}
+
+	function toggleRightFlyout() {
+		const rightFlyout = document.getElementById("right-flyout");
+		if (rightFlyout.style.display === "block") {
+			rightFlyout.style.display = "none";
+		} else {
+			rightFlyout.style.display = "block";
+		}
 	}
 
 </script>
@@ -134,6 +147,8 @@ import Layout from "../layouts/Layout.astro";
 	/* Container for all cards */
 	#font-container {
 		display: flex;
+		float: left;
+		max-width: 55%;
 		flex-wrap: wrap;
 		justify-content: center;
 		gap: 30px;
@@ -142,5 +157,33 @@ import Layout from "../layouts/Layout.astro";
 	.font-sample:hover {
 		transform: translateY(-5px);
 		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	}
+
+	#right-flyout {
+		display: flex;
+		float: right;
+		width: 40%;
+		background-color: #fff;
+		padding: 20px;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+		z-index: 10;
+		display: none;
+	}
+
+	#right-flyout h2 {
+		margin-top: 0;
+	}
+
+	@media screen and (max-width: 800px) {
+		#font-container {
+			float: none;
+			max-width: 100%;
+		}
+
+		#right-flyout {
+			width: 90%;
+			float: none;
+		}
+		
 	}
 </style>
