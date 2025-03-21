@@ -1,0 +1,120 @@
+@import url("https://assets.c48.uk/fonts/lexend.css");
+@import url("https://assets.c48.uk/fonts/montserrat.css");
+
+body {
+    font-family: Lexend, Calibri, Carlito, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 30px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+code {
+    font-family: 'Sometype Mono', monospace;
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.a {
+    color: #007bff;
+    text-align: center;
+}
+
+/* Container for all cards */
+#font-container {
+    display: flex;
+    float: left;
+    max-width: 60%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.font-sample {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.font-sample:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.font-name {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.sample-text {
+    font-size: 30px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #fafafa;
+}
+
+.add-button {
+    padding: 10px 20px;
+}
+
+#right-flyout {
+    display: flex;
+    float: right;
+    width: 35%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    display: none;
+}
+
+#right-flyout h2 {
+    margin-top: 0;
+}
+
+#supermaven {
+    display: none;
+}
+
+#about-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 800px) {
+    #font-container {
+        float: none;
+        max-width: 100%;
+    }
+
+    #right-flyout {
+        width: 90%;
+        float: none;
+    }
+
+}

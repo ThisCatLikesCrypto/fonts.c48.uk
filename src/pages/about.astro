@@ -1,0 +1,111 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <div id="about-container">
+        <h1>About</h1>
+        <p class="a"><a href="/">home</a></p>
+        <p>
+            This is a font gallery thingamajib that I decided to make to
+            showcase and organise the fonts that I use across my websites. All
+            fonts (so far) are under the OFL and are hosted on Amazon
+            CloudFront's free tier (I do not intend to pay Amazon as they're
+            American, so if my traffic exceeds 1TB i'll just move to bunny.net
+            lol).
+        </p>
+        <p>
+            <b>General rules/info:</b><br>
+            - Don't use this on any websites which will result in more than 100,000
+            requests in a month. I don't want to start paying for someone else's
+            traffic, and this is more a thing for other people to use on personal/open
+            source project websites and any websites getting that much traffic can
+            probably afford to use their own CDNs (or just google/bunny fonts) anyway.<br>
+            - No SLA or anything to that effect, but I'll try to keep this online 
+            as it's used for my own sites too.<br>
+            - Fonts will <b>not be updated</b>. If you use a font from here, it'll 
+            always be exactly the same. This differs from how Google or Bunny Fonts 
+            operate, where fonts are automatically updated and can change how your 
+            page looks without warning.
+        </p>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <button onclick="toggleSupermaven()">Show/Hide what supermaven decided to autofill here for some reason</button>
+        <div id="supermaven">
+            <p>
+                I'm a software developer and designer based in the UK. I'm
+                currently working as a Senior Software Engineer at <a
+                    href="https://c48.uk">C48</a
+                >.
+            </p>
+            <p>
+                I'm also a big fan of music, especially classical music. I've
+                been playing the piano since I was 12 and I've been learning to
+                play the guitar since I was 16. I've also been playing the drums
+                since I was 18.
+            </p>
+            <p>
+                I'm also a big fan of video games. I've been playing games since
+                I was 10 and I've been playing games since I was 12. I've been
+                playing games since I was 16. I've been playing games since I
+                was 18.
+            </p>
+            <p>
+                I'm also a big fan of movies. I've been watching movies since I
+                was 10 and I've been watching movies since I was 12. I've been
+                watching movies since I was 16. I've been watching movies since
+                I was 18.
+            </p>
+            <p>
+                I'm also a big fan of books. I've been reading books since I was
+                10 and I've been reading books since I was 12. I've been reading
+                books since I was 16. I've been reading books since I was 18.
+            </p>
+            <p>
+                I'm also a big fan of sports. I've been playing sports since I
+                was 10 and I've been playing sports since I was 12. I've been
+                playing sports since I was 16. I've been playing sports since I
+                was 18.
+            </p>
+            <p>
+                I'm also a big fan of musicals. I've been watching musicals
+                since I was 10 and I've been watching musicals since I was 12.
+                I've been watching musicals since I was 16. I've been watching
+                musicals since I was 18.
+            </p>
+            <p>
+                I'm also a big fan of TV shows. I've been watching TV shows
+                since I was 10 and I've been watching TV shows since I was 12.
+                I've been watching TV shows since I was 16. I've been watching
+                TV shows since I was 18.
+            </p>
+            <p>
+                I'm also a big fan of music videos. I've been watching music
+                videos since I was 10 and I've been watching music videos since
+                I was 12. I've been watching music videos since I was 16. I've
+                been watching music videos since I was 18.
+            </p>
+            <p>
+                I'm also a big fan of anime. I've been watching anime since I
+                was 10 and I've been watching anime since I was 12. I've been
+                watching anime since I was 16. I've been watching anime since I
+                was 18.
+            </p>
+            <p>
+                I'm also a big fan of manga. I've been reading manga since I was
+                10 and I've been reading manga since I was 12. I've been reading
+                manga since I was 16. I've been reading manga since I was 18.
+            </p>
+        </div>
+    </div>
+</Layout>
+
+<script is:inline>
+    function toggleSupermaven() {
+        const supermaven = document.getElementById("supermaven");
+        if (supermaven.style.display === "block") {
+            supermaven.style.display = "none";
+        } else {
+            supermaven.style.display = "block";
+        }
+    }
+</script>

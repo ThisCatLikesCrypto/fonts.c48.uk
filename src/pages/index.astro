@@ -4,6 +4,11 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
 	<h1>c48 fonts</h1>
+	<h2>
+		Contains fonts that I use and I may as well host here for others too
+	</h2>
+	<p class="a"><a href="/about">about</a></p>
+	<noscript>(you need javascript)</noscript>
 	<div id="font-container"></div>
 	<div id="right-flyout">
 		<h2>included fonts</h2>
@@ -14,7 +19,7 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-	var fontsAdded: string[] = [];
+	var fontsAdded: String[] = [];
 
 	// URL of the JSON file containing font stylesheet URLs
 	const jsonUrl = "https://assets.c48.uk/fonts/all.json";
@@ -28,7 +33,7 @@ import Layout from "../layouts/Layout.astro";
 		.then((fonts) => {
 			const fontContainer = document.getElementById("font-container");
 
-			fonts.forEach((font) => {
+			fonts.forEach((font: String) => {
 				const fontWithoutHyphens = font.replace("-", " ");
 
 				// Create a link element to load the font stylesheet
@@ -39,46 +44,24 @@ import Layout from "../layouts/Layout.astro";
 
 				// Create a card to display the font sample
 				const fontSample = document.createElement("div");
-				fontSample.className = "font-sample";
-				fontSample.style.backgroundColor = "#fff";
-				fontSample.style.borderRadius = "8px";
-				fontSample.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
-				fontSample.style.padding = "20px";
-				fontSample.style.width = "300px";
-				fontSample.style.textAlign = "center";
-				fontSample.style.transition = "transform 0.3s, box-shadow 0.3s";
+				fontSample.classList.add("font-sample");
 
 				// Display the font name
 				const fontName = document.createElement("div");
-				fontName.className = "font-name";
-				fontName.style.fontSize = "1.8em";
-				fontName.style.fontWeight = "bold";
-				fontName.style.marginBottom = "15px";
+				fontName.classList.add("font-name");
 				fontName.textContent = fontWithoutHyphens;
 				fontSample.appendChild(fontName);
 
 				// Display the sample text in the font
 				const sample = document.createElement("p");
-				sample.className = "sample-text";
-				// i tried to do this with normal stylesheets but it didn't work for some reason
+				sample.classList.add("sample-text");
 				sample.style.fontFamily = fontWithoutHyphens;
-				sample.style.fontSize = "30px";
-				sample.style.padding = "15px";
-				sample.style.border = "1px solid #eee";
-				sample.style.borderRadius = "4px";
-				sample.style.backgroundColor = "#fafafa";
 				sample.textContent = sampleText;
 				fontSample.appendChild(sample);
 
 				const addButton = document.createElement("button");
 				addButton.textContent = "Add to page";
-				addButton.style.backgroundColor = "#007bff";
-				addButton.style.color = "#fff";
-				addButton.style.border = "none";
-				addButton.style.padding = "10px 20px";
-				addButton.style.borderRadius = "4px";
-				addButton.style.cursor = "pointer";
-				addButton.style.fontSize = "1.2em";
+				addButton.classList.add("add-button");
 				addButton.addEventListener("click", () => {
 					if (fontsAdded.includes(font)) {
 						alert("font already added");
@@ -101,7 +84,9 @@ import Layout from "../layouts/Layout.astro";
 
 	function updateIncludedFonts() {
 		const includedFonts = document.getElementById("included-fonts");
-		const includedFontsCode = document.getElementById("included-fonts-code");
+		const includedFontsCode = document.getElementById(
+			"included-fonts-code",
+		);
 		includedFonts.innerHTML = "";
 		includedFontsCode.innerHTML = "";
 		fontsAdded.forEach((font) => {
@@ -127,63 +112,4 @@ import Layout from "../layouts/Layout.astro";
 			rightFlyout.style.display = "block";
 		}
 	}
-
 </script>
-
-<style>
-	/* Global styles */
-	body {
-		font-family: Lexend, Calibri, Carlito, sans-serif;
-		margin: 20px;
-		background-color: #f4f4f4;
-	}
-
-	h1 {
-		text-align: center;
-		font-size: 3em;
-		margin-bottom: 40px;
-	}
-
-	/* Container for all cards */
-	#font-container {
-		display: flex;
-		float: left;
-		max-width: 55%;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 30px;
-	}
-
-	.font-sample:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-	}
-
-	#right-flyout {
-		display: flex;
-		float: right;
-		width: 40%;
-		background-color: #fff;
-		padding: 20px;
-		box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-		z-index: 10;
-		display: none;
-	}
-
-	#right-flyout h2 {
-		margin-top: 0;
-	}
-
-	@media screen and (max-width: 800px) {
-		#font-container {
-			float: none;
-			max-width: 100%;
-		}
-
-		#right-flyout {
-			width: 90%;
-			float: none;
-		}
-		
-	}
-</style>
